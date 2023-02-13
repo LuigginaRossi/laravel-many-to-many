@@ -33,7 +33,10 @@ class StoreProjectRequest extends FormRequest
             "cover_img"=>"nullable|image",
             "github_link"=>"nullable|string|url",
             "completed"=> "boolean",
+            "technologies"=>"nullable|array||exists:technologies,id"
+            // 
         ];
+        
     }
 }
 //  validazione nelle checkbox => accepted il campo puo esssere on 1, 0 , true 

@@ -65,6 +65,29 @@
             <label class="form-check-label" for="switch_public">Completed</label>
           </div>
 
+          {{-- technologies input --}}
+          {{-- @dd($technologies) --}}
+          <div class="py-3">
+            <div class="py-2">Technologies:</div>
+            @foreach ($technologies as $technology)
+              <div class="form-check">
+                <input class="form-check-input @error('technologies') is-invalid @enderror"
+                type="checkbox" value="{{$technology->id}}" id="technology_{{$loop->index}}"
+                name="technologies[]"   {{ in_array( $technology->id, old('technologies', [])) ? 'checked' : '' }} >
+                <label class="form-check-label" for="technology_{{$loop->index}}">
+                  {{$technology->name}}
+                </label>
+                @error('technologies')
+                  <div class="invalid-feedback">
+                    {{$message}}
+                  </div>
+                @enderror
+                
+              </div>
+            @endforeach
+          </div>
+          
+
           {{-- github_link --}}
           <div class="mb-3">
             <label class="form-label">GitHub Link</label>

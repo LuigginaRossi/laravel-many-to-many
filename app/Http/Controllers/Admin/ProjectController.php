@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\StoreProjectRequest;
 use App\Models\Category;
 use App\Models\Project;
+use App\Models\Technology;
 use App\Models\Type;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -23,6 +24,7 @@ class ProjectController extends Controller
         $projects= Project::All();
         $types = Type::all();
         return view('admin.projects.index', compact('projects', 'types'));
+
     }
 
     /**
@@ -33,7 +35,8 @@ class ProjectController extends Controller
     public function create()
     {
         $types = Type::all();
-        return view('admin.projects.create', compact('types'));
+        $technologies = Technology::all();
+        return view('admin.projects.create', compact('types', 'technologies'));
     }
 
     /**
@@ -62,6 +65,10 @@ class ProjectController extends Controller
 
         // $data= $request->all();
         // $project= Project::create($data);
+
+         if($request->has('technologies')){
+            $project->technologies()->attach($data['technologies']);
+         }
 
         return redirect()->route('admin.projects.show', compact('project', 'types'));
     }
@@ -97,8 +104,9 @@ class ProjectController extends Controller
         }
 
         $types = Type::all();
+        $technologies= Technology::all();
 
-        return view('admin.projects.edit', compact('project', 'types'));
+        return view('admin.projects.edit', compact('project', 'types', 'technologies'));
     }
 
     /**
