@@ -133,6 +133,8 @@ class ProjectController extends Controller
             "cover_img"=>$path ?? $project->cover_img,
         ]);
 
+        $project->technologies()->sync($data['technologies']);
+
         return redirect()->route('admin.projects.show', $id);
     }
 

@@ -11,6 +11,7 @@
               <h5 class="card-title">Titolo:{{$project->name}}</h5>
               {{-- @dump($project->types) errore null --}}
               <h5 class="card-title">Tipologia: {{$project->type->name ?? ''}}</h5>
+              
               <h5 class="card-title">Technology: 
                 @foreach ($project->technologies as $technology)
                 <span class="badge rounded-pill text-bg-secondary">{{ $technology->name }}</span>
